@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'foodRecipes.apps.FoodrecipesConfig',
-    'django_elasticsearch_dsl'
+    'api.apps.ApiConfig',
+    'django_elasticsearch_dsl',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
