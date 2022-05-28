@@ -16,7 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from foodRecipes.views import HomeView
+from rest_framework.urlpatterns import format_suffix_patterns
+from api import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view(), name="home"),
+    path('food/', views.getRecipes, name="food"),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
