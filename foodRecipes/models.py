@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Recipes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post", null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes", null=True)
     title = models.CharField(max_length=255)
     ingredient = models.TextField()
     recipe = models.TextField()
