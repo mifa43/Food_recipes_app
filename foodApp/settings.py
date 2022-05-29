@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'django_elasticsearch_dsl',
     'rest_framework',
+    'crispy_forms',
 
 ]
 
