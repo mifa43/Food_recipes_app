@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view(), name="home"),
     path('food/', views.getRecipes, name="food"),
+    path('post-recipe/', views.postRecipes, name="post-recipe"),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
