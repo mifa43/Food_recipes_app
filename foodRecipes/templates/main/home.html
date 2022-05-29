@@ -7,7 +7,7 @@
     <body>
         <h1>Home page</h1>
         <div class="form-container">
-            <form method="post" target="_blank" action="{% url 'post-recipe' %}">{% csrf_token %}
+            <form method="post" action="{% url 'post-recipe' %}">{% csrf_token %}
                 <label for="title">Title: </label>
                 <input id="title" type="text" name="title">
                 
@@ -24,7 +24,7 @@
                 <label for="rating">rating: </label>
                 <input id="rating" type="text" name="rating">
 
-                <input onclick="window.location.href = 'http://localhost:8001/home/';" type="submit" value="OK">
+                <input type="submit" value="OK">
                
 
             </form>
