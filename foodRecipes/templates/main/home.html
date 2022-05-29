@@ -6,7 +6,41 @@
     </head>
     <body>
         <h1>Home page</h1>
-        
+        <div class="form-container">
+            <form method="post" target="_blank" action="{% url 'post-recipe' %}">{% csrf_token %}
+                <label for="title">Title: </label>
+                <input id="title" type="text" name="title">
+                
+                
+                <label for="ingredient">ingredient: </label>
+                <input id="ingredient" type="text" name="ingredient">
+                
+                <label for="recipe">recipe: </label>
+                <input id="recipe" type="text" name="recipe">
+               
+                <label for="author">author: </label>
+                <input id="author" type="text" name="author">
+               
+                <label for="rating">rating: </label>
+                <input id="rating" type="text" name="rating">
+
+                <input onclick="window.location.href = 'http://localhost:8001/home/';" type="submit" value="OK">
+               
+
+            </form>
+        </div>
     </body>
 
 </html>
+
+
+
+<!-- 
+{
+    #     "title": "asfasf",
+    #     "ingredient": "bbbb", 
+    #     "recipe": "asfadfgcvb", 
+    #     "author":"sfxbbb",
+    #     "rating":1
+    
+    # } -->
