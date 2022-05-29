@@ -27,7 +27,6 @@ def postRecipes(request):
             rec.save()  #cuvanje u elastic
             return redirect('home')
 
-
         return Response(rec.data)  
 
 
