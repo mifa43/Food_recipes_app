@@ -1,4 +1,3 @@
-from re import template
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.shortcuts import render
@@ -14,6 +13,4 @@ class GetRecipe(ListView):
     model = Recipes
     context_object_name = "recipe"
     template_name = "main/getRecipes.html"
-    
-        
     
