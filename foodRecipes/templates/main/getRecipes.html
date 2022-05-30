@@ -109,7 +109,79 @@ h2{
     font-size: 16px;
     line-height: 28px;
 }
+.rating {
+  --dir: right;
+  --fill: gold;
+  --fillbg: rgba(100, 100, 100, 0.15);
+  --heart: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.328l-1.453-1.313q-2.484-2.25-3.609-3.328t-2.508-2.672-1.898-2.883-0.516-2.648q0-2.297 1.57-3.891t3.914-1.594q2.719 0 4.5 2.109 1.781-2.109 4.5-2.109 2.344 0 3.914 1.594t1.57 3.891q0 1.828-1.219 3.797t-2.648 3.422-4.664 4.359z"/></svg>');
+  --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
+  --stars: 5;
+  --starsize: 3rem;
+  --symbol: var(--star);
+  --value: 1;
+  --w: calc(var(--stars) * var(--starsize));
+  --x: calc(100% * (var(--value) / var(--stars)));
+  block-size: var(--starsize);
+  inline-size: var(--w);
+  position: relative;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  margin-top: 20px;  
+}
+[dir="rtl"] .rating {
+  --dir: left;
+}
+.rating::-moz-range-track {
+  background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+  block-size: 100%;
+  mask: repeat left center/var(--starsize) var(--symbol);
+}
+.rating::-webkit-slider-runnable-track {
+  background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+  block-size: 100%;
+  mask: repeat left center/var(--starsize) var(--symbol);
+  -webkit-mask: repeat left center/var(--starsize) var(--symbol);
+}
+.rating::-moz-range-thumb {
+  height: var(--starsize);
+  opacity: 0;
+  width: var(--starsize);
+}
+.rating::-webkit-slider-thumb {
+  height: var(--starsize);
+  opacity: 0;
+  width: var(--starsize);
+  -webkit-appearance: none;
+}
+.rating, .rating-label {
+  display: block;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+.rating-label {
+  margin-block-end: 1rem;
+}
 
+/* NO JS */
+.rating--nojs::-moz-range-track {
+  background: var(--fillbg);
+}
+.rating--nojs::-moz-range-progress {
+  background: var(--fill);
+  block-size: 100%;
+  mask: repeat left center/var(--starsize) var(--star);
+}
+.rating--nojs::-webkit-slider-runnable-track {
+  background: var(--fillbg);
+}
+.rating--nojs::-webkit-slider-thumb {
+  background-color: var(--fill);
+  box-shadow: calc(0rem - var(--w)) 0 0 var(--w) var(--fill);
+  opacity: 1;
+  width: 1px;
+}
+[dir="rtl"] .rating--nojs::-webkit-slider-thumb {
+  box-shadow: var(--w) 0 0 var(--w) var(--fill);
+}
 </style>
     <div class="container py-5">
         <h1 style="text-align: center;">Post Recipe</h1>
@@ -123,11 +195,17 @@ h2{
             <!-- <div style="background:url(https://d2gk7xgygi98cy.cloudfront.net/6267-3-large.jpg) no-repeat 50% 50%; background-size:cover; height: 150px"></div> -->
             <div class="recipe-card__body">
                 <h1 class="recipe-card__heading">{{i.title}}</h1>
-                <div id="containerIntro">
-                    <h2 class="recipe-card__subhead" >{{i.author}}</h2>
-                    <img style="width: 25px; margin-left: 10px;"src="https://img.freepik.com/free-vector/start_53876-25533.jpg?t=st=1653940101~exp=1653940701~hmac=e6ed8073ed70859dc8ad1a6fd5393d6f27ee4810563ca678c892b2b2638ddbd1&w=826" alt="alternatetext">
+                <div id="containerIntro">              
+                    <input
+                    class="rating"
+                    max="5"
+                    readonly
+                    step="0.01"
+                    style="--fill:#777;--value:{{i.rating}}"
+                    type="range"
+                    value="3.37">
+                  
                     
-                    <h2 class="recipe-card__subhead" >{{i.rating}}</h2>
                 </div>
                 <ul class="recipe-card__nav">
                     <ol style="text-align: center;">
@@ -154,6 +232,11 @@ h2{
                         
                     </ul>
                 </ul>
+                <h2 class="recipe-card__subhead" ><strong>{{i.author}}</strong></h2>
+                <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+                <form method="post" action="#">
+                    <input type="number">
+                </form>
             </div>
         </div>
             <br>
