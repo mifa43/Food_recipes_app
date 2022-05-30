@@ -19,24 +19,157 @@
 
 {% block content %}
 {% load crispy_forms_tags %}  
-    <h1>Post Recipe</h1>
+<style>
+    body {
+background: #fff;
+font: 13px 'Open Sans', sans-serif;
+color: #222;
+}
+.recipe-card {
+-webkit-box-shadow: 0px 0px 20px 1px rgba(240,241,243,1);
+-moz-box-shadow: 0px 0px 20px 1px rgba(240,241,243,1);
+box-shadow: 0px 0px 20px 1px rgba(240,241,243,1);
+border:1px solid #f0f1f3;
+width: 300px;
+margin: 50px auto;
+}
+.recipe-card__body {    
+padding: 20px;
+}
+.recipe-card__heading {
+padding: 0;
+margin: 0 0 0;
+color: #444;
+}
+.recipe-card__subhead {
+font-size: 13px;
+color: #555;
+margin-bottom: 30px;
+}
+.recipe-card__ingredients {
+list-style: none;
+margin: 0;
+padding: 0;
+margin-left: 10px;
+column-count: 1;
+}
+li {
+margin-bottom: 5px;
+}
+li:before {
+content: '\2022';
+color: #eb9376;
+margin-right: 5px;
+}
+
+
+.recipe-card__nav {
+margin: 0 0 20px;
+padding: 0;
+border-bottom: 1px solid #eb9376;
+}
+li {
+display: inline-block;
+margin-right: 30px
+}
+h3 {
+margin: 0;
+padding: 0;
+}
+h3:after {
+content: '';
+display: block;
+width: 0%;
+padding-top: 10px;
+margin: 0 auto;
+border-bottom: 5px solid #eb9376;
+transition: width 250ms ease-in-out 0s;
+}
+h3:hover {
+cursor: pointer;
+}
+h3:hover:after, h3.active:after {
+width: 100%; 
+}
+
+
+@media (min-width:599px) {
+.recipe-card {
+width: 600px
+}
+.recipe-card__ingredients {
+column-count: 2
+}
+}
+
+h2{
+    display: inline;
+    vertical-align: top;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+}
+
+</style>
     <div class="container py-5">
+        <h1 style="text-align: center;">Post Recipe</h1>
+
         {% for i in recipe %}
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+        <div class='recipe-card' id="myForm">
+            <!-- <div style="background:url(https://d2gk7xgygi98cy.cloudfront.net/6267-3-large.jpg) no-repeat 50% 50%; background-size:cover; height: 150px"></div> -->
+            <div class="recipe-card__body">
+                <h1 class="recipe-card__heading">{{i.title}}</h1>
+                <div id="containerIntro">
+                    <h2 class="recipe-card__subhead" >{{i.author}}</h2>
+                    <img style="width: 25px; margin-left: 10px;"src="https://img.freepik.com/free-vector/start_53876-25533.jpg?t=st=1653940101~exp=1653940701~hmac=e6ed8073ed70859dc8ad1a6fd5393d6f27ee4810563ca678c892b2b2638ddbd1&w=826" alt="alternatetext">
+                    
+                    <h2 class="recipe-card__subhead" >{{i.rating}}</h2>
+                </div>
+                <ul class="recipe-card__nav">
+                    <ol style="text-align: center;">
+                        <h3 class="active">Ingredients</h3>
+                    </ol>
+
+                    <ul class="recipe-card__ingredients" style="margin: 15px;">
+                        
+                        <li>&frac14; {{i.ingredient}}</li>
+                     
+                    </ul>
+                    
+                 
+                </ul>
+                <ul class="recipe-card__nav">
+                   
+                    
+                    <ol style="text-align: center;">
+                        <h3 class="active">Method</h3>
+                    </ol>
+
+                    <ul class="recipe-card__ingredients">
+                        <li>&frac14; {{i.recipe}}</li>
+                        
+                    </ul>
+                </ul>
+            </div>
+        </div>
             <br>
-            <strong>{{i.title}} </strong>
-            <strong>{{i.ingredient}} </strong>
-            <strong>{{i.recipe}} </strong>
-            <strong>{{i.author}} </strong>
-            <strong>{{i.rating}} </strong>
+    </div>
+
+
         {% endfor %}
-        <form class="uniForm blueForms" method="get" action="{% url 'food' %}">{% csrf_token %}
+        <!-- <form class="uniForm blueForms" method="get" action="{% url 'food' %}">{% csrf_token %}
             
 
             <input class="btn btn-primary" type="submit" value="submit" style="margin: 10px;">
         
 
-        </form>
-    </div>
+        </form> -->
+
+   
 {% endblock %}
 
 <!-- 
