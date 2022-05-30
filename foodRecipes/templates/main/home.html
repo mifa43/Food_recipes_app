@@ -20,13 +20,13 @@
 {% block content %}
 {% load crispy_forms_tags %}  
 
-    <h1>Post Recipe</h1>
+    <!-- <h1>Post Recipe</h1> -->
     <div class="container py-5">
-        
+        <h1 style="text-align: center;">Post Recipe</h1>
         <form class="uniForm blueForms" method="post" action="{% url 'post-recipe' %}">{% csrf_token %}
+            
             <label for="title"  >Title: </label>
             <input id="title"class="form-control" type="text" name="title">
-            
             
             <label for="ingredient">ingredient: </label>
             <!-- <input id="ingredient" class="form-control" type="text" name="ingredient"> -->
