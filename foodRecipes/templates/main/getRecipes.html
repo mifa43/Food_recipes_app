@@ -234,8 +234,8 @@ h2{
                 </ul>
                 <h2 class="recipe-card__subhead" ><strong>{{i.author}}</strong></h2>
                 <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-                <form method="post" action="#">
-                    <input type="number">
+                <form method="post" action="{% url 'post-recipe' %}">{% csrf_token %}
+                  <input id="author" class="form-control" type="number" name="author">
                 </form>
             </div>
         </div>
