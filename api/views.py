@@ -29,7 +29,6 @@ def postRecipes(request):
 
         return Response(rec.data)  
 
-
 # {
 #     "title": "asfasf",
 #     "ingredient": "bbbb", 
