@@ -27,6 +27,9 @@ urlpatterns = [
     path('food/', views.getRecipes, name="food"),
     path('post-recipe/', views.postRecipes, name="post-recipe"),
 
+    path('post-rating/', views.postRecipes, name="post-rating"),
+
+    path('account/register', views.register, name="register")
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
