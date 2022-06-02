@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'foodRecipes.apps.FoodrecipesConfig'
+    'foodRecipes.apps.FoodrecipesConfig',
+    'api.apps.ApiConfig',
+    'django_elasticsearch_dsl',
+    'rest_framework',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -79,6 +84,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'elasticsearch:9200'
+    },
 }
 
 

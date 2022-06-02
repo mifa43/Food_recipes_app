@@ -1,12 +1,59 @@
-<!DOCTYPE html>
 
-<html>
-    <head>
-        <title>Food App</title>
-    </head>
-    <body>
-        <h1>Home page</h1>
+
+{% extends 'main/base.html' %}
+{% block head %}
+ 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    {% block title %}
+    Food App
+    {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}  
+
+    <!-- <h1>Post Recipe</h1> -->
+    <div class="container py-5">
+        <h1 style="text-align: center;">Post Recipe</h1>
+        <form class="uniForm blueForms" method="post" action="{% url 'post-recipe' %}">{% csrf_token %}
+            
+            <label for="title"  >Title: </label>
+            <input id="title"class="form-control" type="text" name="title">
+            
+            <label for="ingredient">ingredient: </label>
+            <!-- <input id="ingredient" class="form-control" type="text" name="ingredient"> -->
+            <textarea class="form-control rounded-0" id="ingredient" name="ingredient" rows="5"></textarea>
+
+            <label for="recipe">recipe: </label>
+            <textarea class="form-control rounded-0" id="recipe" name="recipe" rows="5"></textarea>
         
-    </body>
+            <label for="author">author: </label>
+            <input id="author" class="form-control" type="text" name="author">
+        
+            <!-- <label for="rating">rating: </label>
+            <input id="rating" class="form-control" type="number" max="5" maxlength="5" minlength="1" name="rating"> -->
 
-</html>
+            <input class="btn btn-primary" type="submit" value="submit" style="margin: 10px;">
+        
+
+        </form>
+    </div>
+{% endblock %}
+
+<!-- 
+{
+    #     "title": "asfasf",
+    #     "ingredient": "bbbb", 
+    #     "recipe": "asfadfgcvb", 
+    #     "author":"sfxbbb",
+    #     "rating":1
+    
+    # } -->
