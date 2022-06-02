@@ -10,9 +10,8 @@ class RecipesSerializer(serializers.ModelSerializer):
     ingredient = serializers.CharField()
     recipe = serializers.CharField()
     author = serializers.CharField(max_length=200)
-    
     rating = serializers.IntegerField(required=False, default=0)
 
     class Meta:
         model = Recipes
-        fields = ('__all__')
+        fields = ("__all__")
