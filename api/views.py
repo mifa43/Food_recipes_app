@@ -1,3 +1,5 @@
+from cgitb import handler
+from urllib import response
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.models import Recipes
@@ -32,12 +34,17 @@ def postRecipes(request):
 def register(request):
     if request.method == 'POST':
         reg = UserSerializer(User(), request.data)
-        email = requests.get("https://api.hunter.io/v2/email-verifier?email=mifa43kotez@gmail.com&api_key=9da638a648b2befb4689c7d152cc8cb07ad1a7e8")
-        if reg.is_valid(raise_exception=True):
-            print(email.content)
+        email = requests.get(f"https://api.hunter.io/v2/email-verifier?email={request.data['email']}&api_key=9da638a648b2befb4689c7d152cc8cb07ad1a7e8")
+        handler = email.json()
+        print(request.data["email"])
+        if handler["data"]["webmail"] == True:
 
-            # reg.save()
-            return Response(reg.data )
+            if reg.is_valid(raise_exception=True):
+    
+                reg.save()
+                return Response(reg.data )
+        else:
+            return Response({"email": "is not valid"})
         return Response(reg.data )
 # { 
 #     "title": "asfasf",
@@ -50,4 +57,10 @@ def register(request):
 
 # {"username": "adgsdegts34", 
 # "email": "mifa43@gmail.com",
+#  "password":  "kskslfk224"}
+
+# patrick@stripe.com
+
+# {"username": "adawfrgsdegts34", 
+# "email": "patrick@stripe.com",
 #  "password":  "kskslfk224"}
