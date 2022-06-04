@@ -4,6 +4,8 @@ services:
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      DJANGO_CLEARBIT_APIKEY: ${DJANGO_CLEARBIT_APIKEY}
     volumes:
       - .:/code
     ports:
