@@ -15,9 +15,11 @@ class Recipes(models.Model):
             return self.title
 
 class ClearBitData(models.Model):
-    domain = models.CharField(max_length=255)
+    domain = models.CharField(max_length=255, unique=True)
     streetAddress = models.CharField(max_length=255)
     foundedYear = models.CharField(max_length=255)
     linkedin = models.CharField(max_length=255)
 
+    def __str__(self):
+            return self.domain
 
