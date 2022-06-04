@@ -13,3 +13,11 @@ class Recipes(models.Model):
 
     def __str__(self):
             return self.title
+
+class ClearBitData(models.Model):
+    domain = models.CharField(max_length=255)
+    streetAddress = models.CharField(max_length=255)
+    foundedYear = models.CharField(max_length=255)
+    linkedin = models.CharField(max_length=255)
+
+
