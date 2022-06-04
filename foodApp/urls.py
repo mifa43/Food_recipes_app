@@ -18,6 +18,8 @@ from django.urls import path
 from foodRecipes.views import HomeView, GetRecipe
 from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
+from rest_framework_simplejwt import views as jwt_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,10 +30,12 @@ urlpatterns = [
     path('post-recipe/', views.postRecipes, name="post-recipe"),
     path('post-clearbit-data/', views.clearBitApi, name="post-clearbit-data"),
 
-
+    path('test/', views.Auth.as_view(), name='test'),
     path('post-rating/', views.postRecipes, name="post-rating"),
 
-    path('account/register', views.register, name="register")
+    path('account/register', views.register, name="register"),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
