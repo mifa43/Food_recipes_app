@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Recipes, ClearBitData
 from django.contrib.auth.models import User
 from rest_framework.fields import CurrentUserDefault
+from django.contrib.auth.hashers import make_password
 
 # u fastapi-u kao pydantic modeli
 class RecipesSerializer(serializers.ModelSerializer):
@@ -29,6 +30,11 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+    def validate_password(self, value: str) -> str:
+
+        return make_password(value)
+
 
 class ClearBitSerializer(serializers.ModelSerializer):
 
