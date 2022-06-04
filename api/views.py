@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 import requests
 from requests.auth import HTTPBasicAuth
+import os
 # Create your views here.
 
 
@@ -53,40 +54,26 @@ def register(request):
 def clearBitApi(request):
     if request.method == 'POST':
         method = "get"
-        url = "https://person-stream.clearbit.com/v1/people/email/alex@alexmaccaw.com"
-        token = "-u sk_990572798c73dacbc19933426c0ff168:"
-        headers = {'Authorization': 'Token sk_990572798c73dacbc19933426c0ff168:'}
-        hed={"username": "sk_990572798c73dacbc19933426c0ff168:"}
-        rsp = requests.request(method, url, headers=headers, auth=hed)
-        print(rsp.content)
-        # data = ClearBitSerializer(ClearBitData(), request.data)
-        # getData = requests.post("https://person-stream.clearbit.com/v1/people/email/alex@alexmaccaw.com -u sk_990572798c73dacbc19933426c0ff168:")
-        # print(getData.content)
-        # if data.is_valid(raise_exception=True):
-    
-        #     data.save()
-        #     return Response(data.data )
-        # else:
-        #     return Response({"email": "is not valid"})
-        return Response(rsp )
-# { 
-#     "title": "asfasf",
-#     "ingredient": "bbbb", 
-#     "recipe": "asfadfgcvb", 
-#     "author":"sfxbbb",
-#     "rating":1
-# }
-# # request body
-
-# {"username": "adgsdegts34", 
-# "email": "mifa43@gmail.com",
-#  "password":  "kskslfk224"}
-
-# patrick@stripe.com
-
-# {"username": "adawfrgsdegts34", 
-# "email": "patrick@stripe.com",
-#  "password":  "kskslfk224"}
-
-# sk_990572798c73dacbc19933426c0ff168 streetAddress foundedYear sectordomain location linkedin employees estimatedAnnualRevenue 
-
+        url = f"https://person.clearbit.com/v2/combined/find?email={request.data['email']}"
+        headers = {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer {0}'.format(os.getenv("DJANGO_CLEARBIT_APIKEY"))
+            }
+        rsp = requests.request(method, url, headers=headers)
+        r = rsp.json()
+        ds = {
+            "domain": r["company"]["domain"],
+            "streetAddress": r["company"]["geo"]["streetAddress"],
+            "foundedYear": r["company"]["foundedYear"],
+            "linkedin": "linkedin.com/" + r["company"]["linkedin"]["handle"]
+            }
+        data = ClearBitSerializer(ClearBitData(), ds)
+        try:
+            if data.is_valid(raise_exception=True):
+        
+                data.save()
+                return Response(data.data )
+        except:
+     
+            return Response({"domain": "exists"})
+# {"email": "patrick@stripe.com"}
