@@ -10,6 +10,9 @@ from django.contrib.auth.models import User
 import requests
 from requests.auth import HTTPBasicAuth
 import os
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 # Create your views here.
 
 
@@ -36,6 +39,8 @@ def postRecipes(request):
 def register(request):
     if request.method == 'POST':
         reg = UserSerializer(User(), request.data)
+
+        # provera unesenog emaila slanje requesta na Hunter api
         email = requests.get(f"https://api.hunter.io/v2/email-verifier?email={request.data['email']}&api_key=9da638a648b2befb4689c7d152cc8cb07ad1a7e8")
         handler = email.json()
         print(request.data["email"])
@@ -53,20 +58,27 @@ def register(request):
 @api_view(["POST"])
 def clearBitApi(request):
     if request.method == 'POST':
+
+        # request settings
         method = "get"
         url = f"https://person.clearbit.com/v2/combined/find?email={request.data['email']}"
+
+        # saljemo api key 
         headers = {
             'Accept': 'application/json',
             'Authorization': 'Bearer {0}'.format(os.getenv("DJANGO_CLEARBIT_APIKEY"))
             }
         rsp = requests.request(method, url, headers=headers)
         r = rsp.json()
+
+        # handlovanje responsa
         ds = {
             "domain": r["company"]["domain"],
             "streetAddress": r["company"]["geo"]["streetAddress"],
             "foundedYear": r["company"]["foundedYear"],
             "linkedin": "linkedin.com/" + r["company"]["linkedin"]["handle"]
             }
+
         data = ClearBitSerializer(ClearBitData(), ds)
         try:
             if data.is_valid(raise_exception=True):
@@ -76,4 +88,13 @@ def clearBitApi(request):
         except:
      
             return Response({"domain": "exists"})
+
+class Auth(APIView):    # auth api
+    permission_classes = (IsAuthenticated,) # mora da se authentifikujemo
+
+    def get(self, request): # kada odemo na test/ rutu prikazuje text 
+        content = {'message': 'Some cool TOKEN!'}
+        return Response(content)
+
+
 # {"email": "patrick@stripe.com"}
