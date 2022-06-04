@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipes
+from .models import Recipes, ClearBitData
 from django.contrib.auth.models import User
 from rest_framework.fields import CurrentUserDefault
 
@@ -29,3 +29,18 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+class ClearBitSerializer(serializers.ModelSerializer):
+
+    domain = serializers.CharField(max_length=255)
+    streetAddress = serializers.CharField(max_length=255)
+    foundedYear = serializers.CharField(max_length=255)
+    linkedin = serializers.CharField(max_length=255)
+
+    class Meta:
+        model = ClearBitData
+        fields = ("__all__")
+
+
+
+            
