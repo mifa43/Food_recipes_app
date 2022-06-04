@@ -26,6 +26,8 @@ urlpatterns = [
 
     path('food/', views.getRecipes, name="food"),
     path('post-recipe/', views.postRecipes, name="post-recipe"),
+    path('post-clearbit-data/', views.clearBitApi, name="post-clearbit-data"),
+
 
     path('post-rating/', views.postRecipes, name="post-rating"),
 
