@@ -13,4 +13,3 @@ class GetRecipe(ListView):
     model = Recipes
     context_object_name = "recipe"
     template_name = "main/getRecipes.html"
-    
