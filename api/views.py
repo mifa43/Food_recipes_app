@@ -119,3 +119,7 @@ def searchRecipe(request):
                     "rating": hit.rating
                 })
     return Response("search recipes, ingredients and title")  
+
+# {
+# "title": "pizza"
+# }
