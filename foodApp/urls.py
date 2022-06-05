@@ -31,7 +31,7 @@ urlpatterns = [
     path('post-clearbit-data/', views.clearBitApi, name="post-clearbit-data"),
 
     path('test/', views.Auth.as_view(), name='test'),
-    path('post-rating/', views.postRecipes, name="post-rating"),
+    # path('post-rating/', views.postRecipes, name="post-rating"), 
 
     path('account/register', views.register, name="register"),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
