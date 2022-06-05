@@ -110,7 +110,47 @@ def searchRecipe(request):
         if "title" in request.data: # ako u json body postoji title pretrazujemo recepte po naslovu
             rec = RecipesDocument.search().query("match", title=f"{request.data['title']}")
             for hit in rec:
-                print(hit.ingredient)
+                print({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+                return Response({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+        if "ingredient" in request.data:
+            rec = RecipesDocument.search().query("match", ingredient=f"{request.data['ingredient']}")
+            for hit in rec:
+                print({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+                return Response({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+        if "recipe" in request.data:
+            rec = RecipesDocument.search().query("match", recipe=f"{request.data['recipe']}")
+            for hit in rec:
+                print({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
                 return Response({
                     "title": hit.title,
                     "ingredient": hit.ingredient,
@@ -119,7 +159,3 @@ def searchRecipe(request):
                     "rating": hit.rating
                 })
     return Response("search recipes, ingredients and title")  
-
-# {
-# "title": "pizza"
-# }
