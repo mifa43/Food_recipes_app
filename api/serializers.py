@@ -3,7 +3,7 @@ from .models import Recipes, ClearBitData
 from django.contrib.auth.models import User
 from rest_framework.fields import CurrentUserDefault
 from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth import get_user_model
 # u fastapi-u kao pydantic modeli
 class RecipesSerializer(serializers.ModelSerializer):
     user = CurrentUserDefault()
@@ -33,7 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value: str) -> str:
 
-        return make_password(value)
+        return make_password(value) # algorithm za password resen problem 
 
 
 class ClearBitSerializer(serializers.ModelSerializer):
@@ -47,6 +47,9 @@ class ClearBitSerializer(serializers.ModelSerializer):
         model = ClearBitData
         fields = ("__all__")
 
-
+class UserTokenSerialiser(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ("username", "id")
 
             
