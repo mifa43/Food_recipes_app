@@ -14,10 +14,10 @@
 {% block content %}
 <div class="container py-5" style="height: 100%; width: 50%;">
     <form method="POST" action="{% url 'token_obtain_pair' %} " class="uniForm blueForms" name="loginForm" id="loginForm" style="text-align: center;">
-        <input type="text" id="username" name="username" placeholder="*Username" style="margin: 15px;"><br>
-        <input type="password" id="password" name="password" placeholder="*Password">
         {% csrf_token %}
-        <p>Don't have an account?<a href="/register">Click her</a></p>
+        <input type="text" id="username" name="username" placeholder="*Username" style="margin: 15px;"><br>
+        <input type="password" id="password" name="password" placeholder="*Password"><br>
+        <p>Don't have an account?<a href="{% url 'registerForm' %}">Click her</a></p>
         <button type="submit", class="btn btn-success">Login</button>
     </form>
 </div>
