@@ -13,7 +13,7 @@ import os
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-
+from api.documents import RecipesDocument
 
 # Create your views here.
 
@@ -101,3 +101,61 @@ class Auth(APIView):    # auth api
     def get(self, request): # kada odemo na test/ rutu prikazuje text 
         content = {'message': 'Some cool TOKEN!'}
         return Response(content)
+
+@csrf_protect
+@api_view(["POST", "GET"])  # kao i u fastapi deklaracija metode
+@permission_classes([IsAuthenticated])
+def searchRecipe(request):    
+    if request.method == 'POST':
+        if "title" in request.data: # ako u json body postoji title pretrazujemo recepte po naslovu
+            rec = RecipesDocument.search().query("match", title=f"{request.data['title']}")
+            for hit in rec:
+                print({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+                return Response({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+        if "ingredient" in request.data:
+            rec = RecipesDocument.search().query("match", ingredient=f"{request.data['ingredient']}")
+            for hit in rec:
+                print({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+                return Response({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+        if "recipe" in request.data:
+            rec = RecipesDocument.search().query("match", recipe=f"{request.data['recipe']}")
+            for hit in rec:
+                print({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+                return Response({
+                    "title": hit.title,
+                    "ingredient": hit.ingredient,
+                    "recipe": hit.recipe,
+                    "author": hit.author,
+                    "rating": hit.rating
+                })
+    return Response("search recipes, ingredients and title")  
