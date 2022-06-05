@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view(), name="home"),
     path('get-recipes/', GetRecipe.as_view(), name="get-recipes"),
-
+    path('search/', views.searchRecipe, name='search'),
     path('food/', views.getRecipes, name="food"),
     path('post-recipe/', views.postRecipes, name="post-recipe"),
     path('post-clearbit-data/', views.clearBitApi, name="post-clearbit-data"),
