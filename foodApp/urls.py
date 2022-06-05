@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from foodRecipes.views import HomeView, GetRecipe
 from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
@@ -29,7 +29,7 @@ urlpatterns = [
     path('food/', views.getRecipes, name="food"),
     path('post-recipe/', views.postRecipes, name="post-recipe"),
     path('post-clearbit-data/', views.clearBitApi, name="post-clearbit-data"),
-
+    path("", include("django.contrib.auth.urls")),
     path('test/', views.Auth.as_view(), name='test'),
     # path('post-rating/', views.postRecipes, name="post-rating"), 
 
