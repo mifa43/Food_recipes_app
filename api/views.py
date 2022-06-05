@@ -101,5 +101,3 @@ class Auth(APIView):    # auth api
     def get(self, request): # kada odemo na test/ rutu prikazuje text 
         content = {'message': 'Some cool TOKEN!'}
         return Response(content)
-
-# {"email": "patrick@stripe.com"}
