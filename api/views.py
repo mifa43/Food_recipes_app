@@ -158,4 +158,8 @@ def searchRecipe(request):
                     "author": hit.author,
                     "rating": hit.rating
                 })
+<<<<<<< HEAD
     return Response("search recipes, ingredients and title")  
+=======
+    return Response("search recipes, ingredients and title")  
+>>>>>>> d40a33e1b1da9d9fe0ca7adb4b327477ec8f0e07
