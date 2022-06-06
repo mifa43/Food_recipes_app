@@ -10,9 +10,9 @@ Create Account
    <form method="POST" class="form-group" action="{% url 'register' %}" name="loginForm" id="loginForm" style="text-align: center;">
        {% csrf_token %}
        <input type="text" id="username"  name="username" placeholder="*Username" style="margin: 15px;"><br>
-       <input type="text" id="email" name="email" placeholder="*email" style="margin: 15px;"><br>
-       <input type="password" id="password" name="password" placeholder="*password" style="margin: 15px;"><br>
-       <input type="password" id="password" name="password" placeholder="*password" style="margin: 15px;"><br>
+       <input type="text" id="email" name="email" placeholder="*Email" style="margin: 15px;"><br>
+       <input type="password" id="password" name="password" placeholder="*Password" style="margin: 15px;"><br>
+       <input type="password" id="password" name="password" placeholder="*Password" style="margin: 15px;"><br>
        <button type="submit" class="btn btn-success">Register</button>
    </form>
 
