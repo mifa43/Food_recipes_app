@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="container py-5" style="height: 100%; width: 50%;">
-    <form method="POST" action="{% url 'token_obtain_pair' %} " class="uniForm blueForms" name="loginForm" id="loginForm" style="text-align: center;">
+    <form method="POST" action="{% url 'token_obtain_pair' %} " class="uniForm blueForms" name="loginForm" id="loginForm" style="text-align: center;" >
         {% csrf_token %}
         <input type="text" id="username" name="username" placeholder="*Username" style="margin: 15px;"><br>
         <input type="password" id="password" name="password" placeholder="*Password"><br>
