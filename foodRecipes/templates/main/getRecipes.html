@@ -183,8 +183,10 @@ h2{
   box-shadow: var(--w) 0 0 var(--w) var(--fill);
 }
 </style>
+
     <div class="container py-5">
-        <h1 style="text-align: center;">Post Recipe</h1>
+      
+        <h1 style="text-align: center;">Get recipes</h1>
 
         {% for i in recipe %}
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -241,7 +243,8 @@ h2{
         </div>
             <br>
     </div>
-
+  
+    
 
         {% endfor %}
         <!-- <form class="uniForm blueForms" method="get" action="{% url 'food' %}">{% csrf_token %}
@@ -251,8 +254,6 @@ h2{
         
 
         </form> -->
-
-   
 {% endblock %}
 
 <!-- 

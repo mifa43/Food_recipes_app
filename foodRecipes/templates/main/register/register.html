@@ -1,0 +1,31 @@
+
+{% extends 'main/base.html' %}
+<!-- take everything from -->
+{% block title %}
+Create Account
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+   <form method="POST" class="form-group" action="{% url 'register' %}" name="loginForm" id="loginForm" style="text-align: center;">
+       {% csrf_token %}
+       <input type="text" id="username"  name="username" placeholder="*Username" style="margin: 15px;"><br>
+       <input type="text" id="email" name="email" placeholder="*Email" style="margin: 15px;"><br>
+       <input type="password" id="password" name="password" placeholder="*Password" style="margin: 15px;"><br>
+       <input type="password" id="password" name="password" placeholder="*Password" style="margin: 15px;"><br>
+       <button type="submit" class="btn btn-success">Register</button>
+   </form>
+
+   <script>
+    var formData = JSON.stringify($("#loginForm").serializeArray());
+    $.ajax({
+        type: "POST",
+        url: "serverUrl",
+        data: formData,
+        success: function(){},
+        dataType: "json",
+        contentType : "application/json"
+    });
+
+</script>
+{% endblock %}
