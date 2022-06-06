@@ -20,3 +20,7 @@ class Register(CreateView):
     form_class = RegisterForm
     template_name = "main/register/register.html"
     # success_url = reverse_lazy("home")
+
+class SearchView(TemplateView):
+    template_name = "main/search.html"
+    # context_object_name = "recipe"
