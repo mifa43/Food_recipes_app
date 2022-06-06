@@ -24,3 +24,7 @@ class Register(CreateView):
 class SearchView(TemplateView):
     template_name = "main/search.html"
     # context_object_name = "recipe"
+
+class ClearbitView(TemplateView):
+    template_name = "main/clearbit.html"
+    # context_object_name = "recipe"
