@@ -8,7 +8,7 @@ Create Account
 {% load crispy_forms_tags %}
 {% block content %}
    <form method="POST" class="form-group" action="{% url 'post-clearbit-data' %}" name="emailForm" id="emailForm" style="text-align: center;">
-       {% csrf_token %}
+        {% csrf_token %}
        <input type="email" id="email"  name="email" placeholder="*Email" style="margin: 15px;"><br>
      
        <button type="submit" class="btn btn-success">Post</button>
