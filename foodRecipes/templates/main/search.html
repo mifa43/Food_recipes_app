@@ -1,0 +1,31 @@
+
+{% extends 'main/base.html' %}
+<!-- take everything from -->
+{% block title %}
+Create Account
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+   <form method="POST" class="form-group" action="{% url 'search' %}" name="searchForm" id="searchForm" style="text-align: center;">
+       {% csrf_token %}
+       <input type="text" id="title"  name="title" placeholder="*Recipe title" style="margin: 15px;"><br>
+       <input type="text" id="ingredient" name="ingredient" placeholder="*Ingredient" style="margin: 15px;"><br>
+       <input type="text" id="recipe" name="recipe" placeholder="*Method" style="margin: 15px;"><br>
+       <button type="submit" class="btn btn-success">Search</button>
+   </form>
+
+   <script>
+    var formData = JSON.stringify($("#searchForm").serializeArray());
+    $.ajax({
+        type: "POST",
+        url: "serverUrl",
+        data: formData,
+        success: function(){},
+        dataType: "json",
+        contentType : "application/json"
+    });
+
+
+    </script>
+{% endblock %}
